@@ -48,7 +48,7 @@ public class TestController {
 
         	System.out.println("modelAndView.getView()"+modelAndView.getModel().get("name"));
     	}
-    	mv.setViewName("/loginFrm test1 2 3" );
+    	mv.setViewName("/loginFrm test1 2 3 4" );
         return modelAndView;  
                
     }
