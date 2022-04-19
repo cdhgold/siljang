@@ -1,9 +1,10 @@
-package com.cdhgold.jang.busi.test;
+package com.cdhgold.jang.busi.common;
 
  
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,30 +30,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cdhgold.jang.busi.common.CommController;
 import com.cdhgold.jang.config.RunTimeException;
 import com.cdhgold.jang.config.model.Comm;
 
   
 @Controller
-public class TestController extends CommController {
-
-    @Autowired
-    protected TestService testService;
-    @RequestMapping("/loginFrm")
-    public ModelAndView loginFrm(HttpServletRequest request, Model model) {
-    	ModelAndView mv = new ModelAndView();
-    	if(this.getVo() != null ) {
-	        Comm vo = this.getVo();
-	    	mv.setViewName(vo.getPath() );
-	    	mv.addObject("message", vo.getErr());
-	    	this.setVo(null);
-    	}else {
-        	mv.setViewName("/loginFrm");
-    	}
-        return mv;  
+@Primary
+public class CommController {
+	private static Comm commvo;
+    public Comm setVo(Comm vo ) {
+    	commvo = vo;
+        return commvo;  
                
     }
-    
+    public Comm getVo( ) {
+        return this.commvo;  
+               
+    }
 }
 

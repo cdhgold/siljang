@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +34,9 @@ public class TestService {
 
     @Autowired
     private CommDao commDao;
-     
+    @Autowired
+    private RunTimeException runexep;
+    
     /**
      *  select list1
      *
@@ -87,14 +90,14 @@ public class TestService {
      
     public User selectUser( Map map  )  {
         
-        User user;
+        User user=null;
        try {
            user = commDao.selectOne("baseMapper.cdh.selectUser", map);
        }catch(Exception e) {
            //e.printStackTrace();
            //throw e;
-           throw new RunTimeException(e.getMessage(), "/loginFrm");
-            
+    	   runexep.setException(e.getMessage(), "/loginFrm");
+             
        }
        return user;
    }
