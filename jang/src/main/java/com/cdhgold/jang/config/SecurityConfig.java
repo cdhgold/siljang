@@ -47,8 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.loginPage("/loginFrm")
 			.loginProcessingUrl("/login")// login주소가 호출되면 security가 interceptor해서 로그인 진행,userdetailservice.loadUserByUsername 호출 
 			.defaultSuccessUrl("/user/home", true)
-		    .usernameParameter("email")
-            .passwordParameter("pwd")
+		    .usernameParameter("username")
+            .passwordParameter("password")
 		    //.failureHandler(failureHandler())
 		    // 로그인 실패 URL을 설정함 
 		    //.failureForwardUrl("/loginerr")

@@ -28,10 +28,10 @@ public class PrincipalDetailsService implements UserDetailsService{
     // username �� 蹂�寃쏀븯硫� �븞�맂�떎, �궡遺��뿉�꽌 �궗�슜�븯�뒗媛� 
     // login action諛쒖깮�떆 �옄�룞�쑝濡� �샇異쒕맂�떎 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String password) throws UsernameNotFoundException {
  logger.debug("loadUserByUsername - login " );	    
 	    Map map = new HashMap();
-	    map.put("email", email); // �씤肄붾뵫�맂 email 
+	    map.put("password", password); // �씤肄붾뵫�맂 email 
 		User user = testService.selectUser(map);  
 		user.setRole("ROLE_ADMIN");
 		//String pwd = user.getPwd();
