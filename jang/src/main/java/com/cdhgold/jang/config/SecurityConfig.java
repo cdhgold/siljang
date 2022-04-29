@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -22,16 +23,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public BCryptPasswordEncoder encodePwd() {
 		return new BCryptPasswordEncoder();
 	}
-	@Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/static/js/**","/static/css/**","/static/img/**","/static/frontend/**");
+	 
+	@Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("/resources/css/**" );
     }
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.csrf().disable();
-		http.authorizeRequests()
-		    .antMatchers("/workspace").permitAll()
+		http.authorizeRequests() 
+			.mvcMatchers("/css/**").permitAll()
+         	.antMatchers("/workspace/**").permitAll() 
 		    .antMatchers("/").authenticated()
             .antMatchers("/user/**").authenticated()
 			//.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
@@ -57,8 +61,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .logoutSuccessUrl("/loginFrm")
         .invalidateHttpSession(true);
 	}
-	
-	 
+ 
+   
+
+
+
 }
 
 

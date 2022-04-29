@@ -53,6 +53,27 @@ public class TestController extends CommController {
         return mv;  
                
     }
-    
+    @RequestMapping("/workspace/wrk01")
+    public void workspace01(HttpServletRequest request, Model model) {
+    	try {
+    	testService.workspace01();
+    	}catch(Exception e) {
+    		System.out.println("main workspace01==> runtime이후 ");
+    	}
+    	System.out.println("main workspace01==> runtime catch 밖  ");
+    } 
+    @RequestMapping("/workspace/wrk02")
+    public void workspace02(HttpServletRequest request, Model model) {
+    	try {
+    	testService.workspace02();
+    	}catch(Exception e) {
+
+        	System.out.println("main workspace02==> catch안 ");
+    		e.printStackTrace();
+    	}
+    	System.out.println("main workspace02==> runtime이후 ");
+    	
+    	
+    }
 }
 

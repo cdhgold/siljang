@@ -107,4 +107,23 @@ public class TestService {
         
     }
     
+    public void workspace01()  {
+        System.out.println("sub workspace01 =RuntimeException");
+        throw new RuntimeException("test error");
+        
+    }
+    public void workspace02() throws Exception{
+        System.out.println("sub workspace02");
+        
+        this.workspace02_01(); 
+        
+    }
+    public void workspace02_01() throws Exception{
+        System.out.println("sub workspace02_01");
+        if(1==1) {
+        	throw new  RuntimeException("workspace02_01 RuntimeException ");
+        }
+        System.out.println("sub workspace02_01 ..............");
+        
+    }
 }
